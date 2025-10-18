@@ -1,4 +1,4 @@
-package com.learning.project;
+package example.cashcard;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,7 +8,6 @@ public class HelloWorldController {
 
     @GetMapping(path = "/hello")
     public String helloWorld(){
-        return "Hello, world!";
+        return "Hello World!";
     }
-    
 }

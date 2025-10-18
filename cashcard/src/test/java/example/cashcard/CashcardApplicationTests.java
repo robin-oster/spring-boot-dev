@@ -1,10 +1,10 @@
-package com.learning.project;
+package example.cashcard;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProjectApplicationTests {
+class CashcardApplicationTests {
 
 	@Test
 	void contextLoads() {

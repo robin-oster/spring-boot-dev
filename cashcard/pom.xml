@@ -8,11 +8,11 @@
 		<version>3.5.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.learning</groupId>
-	<artifactId>project</artifactId>
+	<groupId>example</groupId>
+	<artifactId>cashcard</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>project</name>
-	<description>Demo project for Spring Boot</description>
+	<name>cashcard</name>
+	<description>Cashcard service for Family Cash Cards</description>
 	<url/>
 	<licenses>
 		<license/>
