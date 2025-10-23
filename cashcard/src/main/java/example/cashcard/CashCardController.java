@@ -1,5 +1,9 @@
 package example.cashcard;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,6 +36,17 @@ public class CashCardController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping
+    private ResponseEntity<List<CashCard>> findAll(Pageable pageable){
+        Page<CashCard> page = cashCardRepository.findAll(
+            PageRequest.of(
+                pageable.getPageNumber(), 
+                pageable.getPageSize(),
+                pageable.getSortOr(Sort.by(Sort.Direction.DESC, "amount"))));
+        return ResponseEntity.ok(page.getContent());
+
     }
 
     @PostMapping
