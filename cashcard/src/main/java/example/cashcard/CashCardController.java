@@ -24,12 +24,9 @@ import java.util.Optional;
 public class CashCardController {
 
     private final CashCardRepository cashCardRepository;
-    private final CashCardPagingAndSortingRepository cashCardPagingAndSortingRepository;
 
-    CashCardController(CashCardRepository cashCardRepository, 
-        CashCardPagingAndSortingRepository cashCardPagingAndSortingRepository){
+    CashCardController(CashCardRepository cashCardRepository){
         this.cashCardRepository = cashCardRepository;
-        this.cashCardPagingAndSortingRepository = cashCardPagingAndSortingRepository;
     }
     
     @GetMapping("/{requestedId}")
@@ -44,11 +41,11 @@ public class CashCardController {
 
     @GetMapping
     private ResponseEntity<List<CashCard>> findAll(Pageable pageable){
-        Page<CashCard> page = cashCardPagingAndSortingRepository.findAll(
+        Page<CashCard> page = cashCardRepository.findAll(
             PageRequest.of(
                 pageable.getPageNumber(), 
                 pageable.getPageSize(),
-                pageable.getSortOr(Sort.by(Sort.Direction.DESC, "amount"))));
+                pageable.getSortOr(Sort.by(Sort.Direction.ASC, "amount"))));
         return ResponseEntity.ok(page.getContent());
 
     }
