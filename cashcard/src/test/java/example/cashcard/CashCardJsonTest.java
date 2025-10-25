@@ -36,6 +36,18 @@ public class CashCardJsonTest {
     }
 
     @Test
+    void cashCardListDeserializationTest() throws IOException {
+        String expected = """
+                [
+                    {"id": 99, "amount": 123.45 },
+                    {"id": 100, "amount": 1.00 },
+                    {"id": 101, "amount": 150.00 }
+                ]
+                """;
+        assertThat(jsonList.parse(expected)).isEqualTo(cashCards);
+    }
+
+    @Test
     void cashCardSerializationTest() throws IOException {
         CashCard cashCard = new CashCard(99L, 123.45);
         assertThat(json.write(cashCard)).isStrictlyEqualToJson("single.json");

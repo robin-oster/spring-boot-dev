@@ -1,6 +1,7 @@
 package example.cashcard;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
@@ -23,9 +24,12 @@ import java.util.Optional;
 public class CashCardController {
 
     private final CashCardRepository cashCardRepository;
+    private final CashCardPagingAndSortingRepository cashCardPagingAndSortingRepository;
 
-    CashCardController(CashCardRepository cashCardRepository){
+    CashCardController(CashCardRepository cashCardRepository, 
+        CashCardPagingAndSortingRepository cashCardPagingAndSortingRepository){
         this.cashCardRepository = cashCardRepository;
+        this.cashCardPagingAndSortingRepository = cashCardPagingAndSortingRepository;
     }
     
     @GetMapping("/{requestedId}")
@@ -40,7 +44,7 @@ public class CashCardController {
 
     @GetMapping
     private ResponseEntity<List<CashCard>> findAll(Pageable pageable){
-        Page<CashCard> page = cashCardRepository.findAll(
+        Page<CashCard> page = cashCardPagingAndSortingRepository.findAll(
             PageRequest.of(
                 pageable.getPageNumber(), 
                 pageable.getPageSize(),
